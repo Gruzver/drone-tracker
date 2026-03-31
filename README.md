@@ -188,6 +188,18 @@ drone_ws/
 
 ---
 
+## Roadmap
+
+| Status | Item |
+|--------|------|
+| 🔄 In progress | Inference time optimization — target < 25 ms per frame |
+| 🔄 In progress | Model weight reduction via pruning and quantization |
+| 📋 Planned | Multispectral model training (thermal + RGB fusion) |
+| 📋 Planned | Paper submission — proposed title tied to the multispectral model |
+| 📋 Planned | Synthetic SAR dataset generation for data augmentation and viability comparison |
+
+---
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.

@@ -1,0 +1,194 @@
+{
+  "extractions": [
+    {
+      "video": "data/raw/thermal_videos/DJI_20260106162834_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260106162834_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-01-06",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260106163422_0002_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260106163422_0002",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-01-06",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260108190417_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260108190417_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-01-08",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260108191005_0002_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260108191005_0002",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-01-08",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260108191553_0003_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260108191553_0003",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-01-08",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260209161905_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260209161905_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-09",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260209162452_0002_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260209162452_0002",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-09",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260210161330_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260210161330_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-10",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260210161918_0002_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260210161918_0002",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-10",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260210162506_0003_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260210162506_0003",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-10",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260210163054_0004_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260210163054_0004",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-10",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260210163642_0005_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260210163642_0005",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-10",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260210164043_0006_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260210164043_0006",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-10",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260212190618_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260212190618_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-12",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260212191659_0002_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260212191659_0002",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-12",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260212192435_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260212192435_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-12",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260212195040_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260212195040_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-12",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260212195822_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260212195822_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-12",
+      "quality": 90
+    },
+    {
+      "video": "data/raw/thermal_videos/DJI_20260212200427_0001_T.MP4",
+      "output_dir": "data/processed/thermal_frames",
+      "frame_step": 30,
+      "prefix": "THERMAL_20260212200427_0001",
+      "start_index": 1,
+      "video_type": "thermal",
+      "capture_date": "2026-02-12",
+      "quality": 90
+    }
+  ]
+}

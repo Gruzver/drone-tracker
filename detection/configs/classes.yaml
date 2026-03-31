@@ -1,0 +1,9 @@
+# Definición de clases
+classes:
+  0: person
+  1: vehicle
+  2: car
+  3: truck
+  4: motorcycle
+  5: bird
+  6: unknown

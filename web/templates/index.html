@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚁 Drone Tracker - Real-time Detection & Mapping</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- ✅ Leaflet.js para mapas dinámicos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>🚁 DRONE TRACKER</h1>
+            <p>Real-time Person Detection & GPS Mapping</p>
+            <div class="status-indicator" id="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Conectando...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Video Section -->
+        <div class="section video-section">
+            <div class="section-header">
+                <h2>📹 Video en Vivo</h2>
+                <span class="frame-info" id="frame-info">Cargando...</span>
+            </div>
+            <div class="video-container">
+                <img id="video-frame" src="" alt="Video Frame" class="video-frame">
+                <div class="video-overlay" id="video-overlay">
+                    <span>Cargando video...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="section map-section">
+            <div class="section-header">
+                <h2>🗺️ Mapa GPS</h2>
+                <span class="map-info" id="map-info">Cargando...</span>
+            </div>
+            <div class="map-container" id="map-container">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Generando mapa...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h2>📊 DASHBOARD</h2>
+        </div>
+
+        <div class="stats-grid">
+            <!-- Frame Info -->
+            <div class="stat-card">
+                <div class="stat-icon">📹</div>
+                <div class="stat-content">
+                    <div class="stat-label">Progreso</div>
+                    <div class="stat-value" id="stat-frame">0/0</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Persons Info -->
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-content">
+                    <div class="stat-label">Personas</div>
+                    <div class="stat-value">
+                        <span id="stat-active">0</span> activas
+                    </div>
+                    <div class="stat-subtext" id="stat-unique">0 únicas</div>
+                </div>
+            </div>
+
+            <!-- Drone Position -->
+            <div class="stat-card">
+                <div class="stat-icon">📍</div>
+                <div class="stat-content">
+                    <div class="stat-label">Posición Dron</div>
+                    <div class="stat-value" id="stat-gps">--</div>
+                    <div class="stat-subtext" id="stat-alt">Alt: -- m</div>
+                </div>
+            </div>
+
+            <!-- Angles -->
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <div class="stat-label">Ángulos</div>
+                    <div class="stat-value" id="stat-yaw">Yaw: --°</div>
+                    <div class="stat-subtext" id="stat-pitch">Pitch: --° | Roll: --°</div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-content">
+                    <div class="stat-label">Performance</div>
+                    <div class="stat-value" id="stat-latency">-- ms</div>
+                    <div class="stat-subtext" id="stat-fps">FPS: --</div>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-content">
+                    <div class="stat-label">Estado</div>
+                    <div class="stat-value" id="stat-status">Offline</div>
+                    <div class="stat-subtext" id="stat-updated">Última actualización: --</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Persons Table -->
+        <div class="persons-table-container">
+            <h3>Personas Detectadas</h3>
+            <table class="persons-table" id="persons-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Estado</th>
+                        <th>Distancia</th>
+                        <th>Confianza</th>
+                        <th>Frames</th>
+                        <th>GPS</th>
+                        <th>Debug</th> <!-- ✅ NUEVA -->
+                    </tr>
+                </thead>
+                <tbody id="persons-tbody">
+                    <tr class="empty-row">
+                        <td colspan="7">Cargando datos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="btn-refresh" class="btn btn-primary">
+                🔄 Actualizar Ahora
+            </button>
+            <button id="btn-download" class="btn btn-secondary">
+                📥 Descargar JSON
+            </button>
+            <button id="btn-fullscreen" class="btn btn-secondary">
+                ⛶ Pantalla Completa
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Drone Tracker v1.0 | Desarrollado con ❤️ en Lima, Perú</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+</body>
+</html>

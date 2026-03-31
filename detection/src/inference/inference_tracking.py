@@ -10,10 +10,11 @@ import torch
 import time
 import numpy as np
 from collections import defaultdict
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 class PersonTracker:
     def __init__(self):
-        self.model = YOLO('models/trained/phase2_finetuned_final_best.pt')
+        self.model = YOLO(str(PROJECT_ROOT / 'detection/models/trained/phase2_finetuned_final_best.pt'))
         self.conf_threshold = 0.5
         self.iou_threshold = 0.45
         
@@ -215,8 +216,8 @@ if __name__ == '__main__':
     tracker = PersonTracker()
     
     # Video a procesar
-    video_path = 'data/raw/thermal_videos/DJI_20260212190618_0001_T.MP4'
-    output_path = 'inference_output/video_con_tracking.mp4'
+    video_path = str(PROJECT_ROOT / 'detection/data/raw/thermal_videos/DJI_20260210161918_0002_T.MP4')
+    output_path = str(PROJECT_ROOT / 'detection/inference_output/video_con_tracking_2.mp4')
     
     # Procesar
     metrics = tracker.process_video(video_path, output_path)

@@ -14,6 +14,10 @@
 
 </div>
 
+<div align="center">
+  <img src="docs/video_test_14.gif" alt="Drone Tracker demo" width="800"/>
+</div>
+
 ---
 
 ## Overview
@@ -21,44 +25,6 @@
 Drone Tracker is a ROS2-based pipeline that processes thermal drone video to detect, track, and geolocate people in real time. Each detected person is assigned a persistent tracking ID and a GPS coordinate derived from the drone's telemetry (altitude, orientation, FOV), then displayed on an interactive web map.
 
 The system was developed for search-and-rescue and surveillance use cases using DJI thermal cameras. The YOLO detection model was trained via transfer learning on a custom thermal dataset of ~5,000 images.
-
----
-
-## Pipeline Architecture
-
-```
-[MP4 Video + SRT Telemetry]
-          │
-          ▼
-┌─────────────────────┐
-│  video_publisher    │  Publishes frames → /camera/thermal/image_raw
-│                     │  Publishes telemetry → /telemetry/drone/state
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  yolo_detection     │  YOLOv8 inference + persistent multi-object tracking
-│                     │  → /detection/persons (PersonDetectionArray)
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  georeferencing     │  Pixel → GPS via FOV projection + Kalman filter
-│                     │  → /gps/persons_location (PersonLocationArray)
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  map_server         │  Aggregates data, exports JSON + JPEG
-│                     │  → /tmp/drone_map_data/
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  Flask Web App      │  Dashboard: live video + Leaflet.js map
-│  localhost:5000     │  Polling every 1s, person trajectories
-└─────────────────────┘
-```
 
 ---
 
@@ -86,17 +52,22 @@ The system was developed for search-and-rescue and surveillance use cases using 
 | [`map_server_node`](src/map_server_node/) | Data aggregation and JSON/image export for the web dashboard |
 | [`drone_tracker_utils`](src/drone_tracker_utils/) | Shared utilities: `GeoCalculator`, `SRTParser`, `FOVVisualizer` |
 
+<div align="center">
+  <img src="docs/rosgraph.png" alt="ROS2 node graph" width="800"/>
+</div>
+
 ---
 
 ## Detection Model
 
-The YOLO model is trained separately in the [`detection/`](detection/) directory using a custom pipeline:
+The YOLO model is trained separately in the [`detection/`](detection/) directory using a custom pipeline built on a proprietary thermal dataset:
 
 - **Base model**: YOLOv8x (pretrained on COCO)
-- **Dataset**: ~4,900 thermal images (3,437 train / 736 val / 737 test)
+- **Dataset**: Custom thermal dataset — ~4,900 annotated frames from DJI thermal cameras (3,437 train / 736 val / 737 test)
 - **Classes**: `person` (1 class)
-- **Training**: 2-phase transfer learning — frozen backbone → full fine-tuning
-- **Export**: ONNX FP16 for deployment
+- **Transfer learning**: Phase 1 — frozen backbone, head-only training on the custom dataset
+- **Fine-tuning**: Phase 2 — full model unfreezing with low learning rate and advanced augmentation (mosaic, mixup, cosine LR)
+- **Quantization**: ONNX FP16 export for optimized deployment *(validation in progress)*
 
 See [`detection/README.md`](detection/README.md) for the full training pipeline.
 
@@ -180,57 +151,6 @@ cd web && python3 app.py
 
 # Open in browser
 http://localhost:5000
-```
-
-### Run nodes individually
-
-```bash
-ros2 run video_publisher_node video_publisher
-ros2 run yolo_detection_node yolo_detector
-ros2 run georeferencing_node georeferencer
-ros2 run map_server_node map_server
-
-# Optional: live detection viewer
-ros2 run yolo_detection_node view_vision
-```
-
----
-
-## Debug Tools
-
-Utility scripts in [`scripts/`](scripts/) for development and troubleshooting:
-
-| Script | Purpose |
-|--------|---------|
-| `debug_bbox.py` | Validate bounding box → GPS conversion, visualize FOV corners |
-| `debug_pixel_to_gps.py` | Step-by-step GPS calculation debug |
-| `debug_timestamps.py` | ROS2 node for telemetry/detection timestamp sync diagnostics |
-| `fov_visualizer_map.py` | Frame-by-frame FOV coverage on a Folium map |
-
-```bash
-python3 scripts/debug_bbox.py
-python3 scripts/fov_visualizer_map.py
-```
-
----
-
-## Custom ROS2 Messages
-
-```
-DroneState
-  timestamp, latitude, longitude
-  altitude_rel, altitude_abs
-  yaw, pitch, roll
-  focal_len, dzoom_ratio
-
-PersonDetection
-  track_id, confidence
-  bbox_x1, bbox_y1, bbox_x2, bbox_y2   # in 640×512 inference space
-  centroid_x, centroid_y, timestamp
-
-PersonLocation
-  track_id, latitude, longitude
-  distance_m, confidence, status, timestamp
 ```
 
 ---
